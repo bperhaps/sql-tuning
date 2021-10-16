@@ -130,7 +130,8 @@ on h.id = c.hospital_id
 
 ![image](https://user-images.githubusercontent.com/33603557/137583290-c495c1f4-b220-407d-a1e7-158e2c62df00.png)
 
-![image](https://user-images.githubusercontent.com/33603557/137583287-79429367-7efe-416f-ada7-018d73ea000d.png)
+ㄹ![image](https://user-images.githubusercontent.com/33603557/137583401-0c25ba1a-75ec-44bc-b764-29ff74a940e6.png)
+
 
 using index condition은 왜 뜨는거지?
 
@@ -207,11 +208,12 @@ age를 범위로 가지고 오기 때문에 age에 인덱스를 걸었으면 hos
 
 group by를 사용하기고, sum이나 min같은 집계함수를 사용하지 않기때문에 인덱스 루스스캔을 사용하기는 어려워 보인다. 따라서 어쩔 수 없이 Using temporary를 허용했다. 여기서 신기한 점은 country에 인덱스를 걸면 오히려 느려진다는점이다. 이유가 무엇일까..
 
-![image](https://user-images.githubusercontent.com/33603557/137583311-5ba68f3e-9c5b-43d9-b236-2d7d46d8221f.png)
+![image](https://user-images.githubusercontent.com/33603557/137583425-8d53ff65-108d-4271-965e-1264899a3c6f.png)
 
-![image](https://user-images.githubusercontent.com/33603557/137583316-2de1eb09-8c97-437b-ad3e-72afb90d6651.png)
+![image](https://user-images.githubusercontent.com/33603557/137583440-48cb4d0c-08cd-4c4c-9cbc-230e83a30914.png)
 
-![image](https://user-images.githubusercontent.com/33603557/137583318-519328bd-5531-4141-8928-c8c340a75bf9.png)
+![image](https://user-images.githubusercontent.com/33603557/137583443-44482626-c52b-4313-b5e9-3dbb8239d3cc.png)
+
 
 
 인덱스를 걸면 쿼리코스트는 줄어든다. 하지만 시간은 약 2배가 더 나온다.. 왜지..? 필터 비용이 더 크기때문이라고 걍 혼자 생각하기로 했다... 하...
@@ -220,7 +222,8 @@ ordering을 하지 않겠다고 명시하였기 때문에 order에서 cost는 �
 
 또 이해가 안가는 부분이 있다. 위 쿼리에 straight_join을 걸었을떄의 문제이다
 
-![image](https://user-images.githubusercontent.com/33603557/137583327-0ea3d138-2e32-471a-a426-d870a443b6b3.png)
+![image](https://user-images.githubusercontent.com/33603557/137583467-46d82e42-fffb-40d2-8784-04b424c7ada9.png)
+
 
 
 member테이블의 row가 4만으로 올랐다. where 절의과 on 절의 영향때문인가 여러 실험을 돌려봤지만, 4만의 row를 얻는 경우는 없었다. 위 순서대로 join을 진행하면 왜 rows가 더 높게나오고, covid 테이블의 row 또한 3으로 증가하는것일까..? 아무리 찾아도 모르겠다...
